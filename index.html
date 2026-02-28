@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+body {
+margin:0;
+font-family:'Georgia', serif;
+background:radial-gradient(circle at bottom,#1a1a2e,#000);
+color:white;
+overflow:hidden;
+}
+
+/* Star background */
+body::before {
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+opacity:0.3;
+animation:moveStars 60s linear infinite;
+}
+
+@keyframes moveStars {
+from{background-position:0 0;}
+to{background-position:1000px 1000px;}
+}
+
+.slide {
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+opacity:0;
+transition:opacity 2s ease;
+}
+
+.slide img {
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(50%);
+}
+
+.text {
+position:relative;
+font-size:26px;
+max-width:80%;
+text-align:center;
+line-height:1.6;
+animation:fadeUp 2s ease;
+}
+
+@keyframes fadeUp {
+from{opacity:0;transform:translateY(30px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.buttons {
+position:absolute;
+bottom:60px;
+display:flex;
+gap:20px;
+display:none;
+}
+
+button {
+padding:15px 35px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#yesBtn {
+background:#ff4b5c;
+color:white;
+box-shadow:0 0 20px #ff4b5c;
+}
+
+#noBtn {
+background:gray;
+color:white;
+position:relative;
+}
+
+/* Final screen */
+#finalScreen {
+display:none;
+position:absolute;
+width:100%;
+height:100%;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+.rose {
+font-size:60px;
+animation:glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+from{text-shadow:0 0 10px red;}
+to{text-shadow:0 0 25px pink;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="slide">
+<img src="photo1.JPG">
+<div class="text">The first time I saw you… I didn’t know my life was changing.</div>
+</div>
+
+<div class="slide">
+<img src="photo2.JPG">
+<div class="text">Your smile still feels like home.</div>
+</div>
+
+<div class="slide">
+<img src="photo3.JPG">
+<div class="text">Even in silence… you are my safest place.</div>
+</div>
+
+<div class="slide">
+<img src="photo4.JPG">
+<div class="text">And in every version of my future… I still choose you.</div>
+</div>
+
+<div class="buttons">
+<button id="yesBtn">Yes ❤️</button>
+<button id="noBtn">No</button>
+</div>
+
+<div id="finalScreen">
+<div class="rose">🌹</div>
+<h1>For you. Always.</h1>
+</div>
+
+<script>
+let slides=document.querySelectorAll(".slide");
+let buttons=document.querySelector(".buttons");
+let yesBtn=document.getElementById("yesBtn");
+let noBtn=document.getElementById("noBtn");
+let finalScreen=document.getElementById("finalScreen");
+let index=0;
+
+function showSlide(i){
+slides.forEach(s=>s.style.opacity="0");
+slides[i].style.opacity="1";
+}
+
+function nextSlide(){
+index++;
+if(index<slides.length){
+showSlide(index);
+}else{
+buttons.style.display="flex";
+}
+}
+
+showSlide(index);
+setInterval(nextSlide,5000);
+
+/* playful no button */
+noBtn.addEventListener("mouseover",function(){
+let x=Math.random()*200-100;
+let y=Math.random()*200-100;
+noBtn.style.transform=`translate(${x}px,${y}px)`;
+});
+
+/* yes button final animation */
+yesBtn.addEventListener("click",function(){
+buttons.style.display="none";
+slides.forEach(s=>s.style.display="none");
+finalScreen.style.display="flex";
+});
+</script>
+
+</body>
+</html>
