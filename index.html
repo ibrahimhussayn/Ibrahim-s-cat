@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+<style>
+body{
+margin:0;
+font-family: 'Georgia', serif;
+background: radial-gradient(circle at center, #2b2b4b, #0f0f1f);
+color:white;
+text-align:center;
+}
+
+.container{
+padding:40px 20px;
+}
+
+h1{
+max-width:700px;
+margin:auto;
+line-height:1.6;
+font-weight:normal;
+animation:fadeIn 2s ease-in;
+}
+
+.gallery{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:15px;
+margin:30px 0;
+}
+
+.gallery img{
+width:160px;
+height:160px;
+object-fit:cover;
+border-radius:15px;
+box-shadow:0 0 20px rgba(255,75,92,0.4);
+}
+
+button{
+padding:15px 35px;
+font-size:18px;
+border-radius:30px;
+border:none;
+background:#ff4b5c;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 25px #ff4b5c;
+}
+
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+canvas{
+display:none;
+background:black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="mainPage">
+
+<h1>
+My love…<br><br>
+In every lifetime, in every version of my story,
+I would still choose you.<br><br>
+Will you go out with me again…
+and let me fall for you all over again? ❤️
+</h1>
+
+<div class="gallery">
+<img src="photo1.JPG">
+<img src="photo2.JPG">
+<img src="photo3.JPG">
+<img src="photo4.JPG">
+</div>
+
+<button onclick="startAnimation()">Yes ❤️</button>
+
+</div>
+
+<canvas id="scene"></canvas>
+
+<script>
+function startAnimation(){
+document.getElementById("mainPage").style.display="none";
+const canvas=document.getElementById("scene");
+canvas.style.display="block";
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const ctx=canvas.getContext("2d");
+
+let x=-100;
+let y=canvas.height/2;
+
+function drawMan(xPos){
+ctx.fillStyle="white";
+ctx.fillRect(xPos,y-60,20,40);
+ctx.fillRect(xPos-10,y-90,40,30);
+ctx.fillRect(xPos-15,y-20,15,40);
+ctx.fillRect(xPos+20,y-20,15,40);
+ctx.fillStyle="red";
+ctx.fillRect(xPos+35,y-40,15,15);
+}
+
+function drawGirl(){
+ctx.fillStyle="pink";
+ctx.fillRect(canvas.width-150,y-60,20,40);
+ctx.fillRect(canvas.width-160,y-90,40,30);
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+if(x<canvas.width-250){x+=2;}
+drawMan(x);
+drawGirl();
+if(x>=canvas.width-250){
+ctx.fillStyle="white";
+ctx.fillRect(x-15,y+10,30,15);
+ctx.font="30px Georgia";
+ctx.fillText("For you. Always. ❤️",canvas.width/2-150,100);
+}
+requestAnimationFrame(animate);
+}
+animate();
+}
+</script>
+
+</body>
+</html>
